@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d99f94a46c9a74caf964c3b6213cc9d1, type: 3}
   m_Name: Wave 1
   m_EditorClassIdentifier: 
-  TotalEnemy: 1
+  TotalEnemy: 3

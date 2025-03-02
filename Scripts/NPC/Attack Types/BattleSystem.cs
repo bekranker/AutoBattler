@@ -7,6 +7,7 @@ public class BattleSystem : MonoBehaviour
     [Header("----Components")]
     [SerializeField] private Holder _enemyHolder;
     [SerializeField] private Holder _playerHolder;
+    [SerializeField] private WaveSystem _waveSystem;
 
     [Header("----Pivots")]
     [SerializeField] private Transform _playerPivot;

@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a470114f6735421898b2ec1b91265a6, type: 3}
   m_Name: Pack of Four
   m_EditorClassIdentifier: 
-  NPCPack: []
+  NPCPack:
+  - {fileID: 11400000, guid: f608c6baa6a6e4b1f9e9f5617c2fd2bb, type: 2}
+  - {fileID: 11400000, guid: f608c6baa6a6e4b1f9e9f5617c2fd2bb, type: 2}
+  - {fileID: 11400000, guid: cc7af64166f764adf801194ff1a5b70e, type: 2}
+  - {fileID: 11400000, guid: f608c6baa6a6e4b1f9e9f5617c2fd2bb, type: 2}

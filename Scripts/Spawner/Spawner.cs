@@ -22,4 +22,15 @@ public class Spawner : MonoBehaviour
             if (_enemyHolder.IsFullBusy) return;
         }
     }
+    public void SpawnEnemies(int count, NPCType type)
+    {
+        if (_enemyHolder.IsFullBusy) return;
+        for (int i = 0; i < count; i++)
+        {
+            NPC spawnedEnemy = Instantiate(_prefab);
+            spawnedEnemy.Init(type, _gameManager, _enemyHolder);
+            _enemyHolder.TakeASeat(spawnedEnemy); // Pass the spawned enemy
+            if (_enemyHolder.IsFullBusy) return;
+        }
+    }
 }

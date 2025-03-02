@@ -13,16 +13,5 @@ MonoBehaviour:
   m_Name: Pack of Two
   m_EditorClassIdentifier: 
   NPCPack:
-  - rid: 6511989589256962120
-  - rid: 6511989589256962119
-  references:
-    version: 2
-    RefIds:
-    - rid: 6511989589256962119
-      type: {class: ArcherAnimation, ns: , asm: Assembly-CSharp}
-      data:
-        _attackSpeed: 0
-    - rid: 6511989589256962120
-      type: {class: MeleeAnimation, ns: , asm: Assembly-CSharp}
-      data:
-        _fightSpeed: 0
+  - {fileID: 11400000, guid: cc7af64166f764adf801194ff1a5b70e, type: 2}
+  - {fileID: 11400000, guid: cc7af64166f764adf801194ff1a5b70e, type: 2}

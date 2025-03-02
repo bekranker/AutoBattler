@@ -22,5 +22,16 @@ public class DoTweenProps : MonoBehaviour
     public Vector3 OnDownScale;
 
 
+    [Header("----Item DoTween Props----")]
+    public float ItemAimMovementSpeed;
+
+    [Header("----Collectable DoTween Props----")]
+    public float MoveSpeed;
+    public Vector3 PunchScale;
+    public float PunchDuration;
+    public float PushForce;
+
+
+
     public Vector3 WithRandom(Vector3 initialVector, float randomGap) => new Vector3(initialVector.x * Random.Range(-randomGap, randomGap), initialVector.y * Random.Range(-randomGap, randomGap), initialVector.z * Random.Range(-randomGap, randomGap));
 }

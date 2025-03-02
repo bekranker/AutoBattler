@@ -136,6 +136,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 3444838528069906827}
   _healCount: {fileID: 5903028415706008542}
   _canvas: {fileID: 8654781898361380107}
+  CoinPrefab: {fileID: 795342456899288888, guid: 49d16e7efb7b9467da0c199c315f2ebb, type: 3}
 --- !u!1 &3934641038913695827
 GameObject:
   m_ObjectHideFlags: 0

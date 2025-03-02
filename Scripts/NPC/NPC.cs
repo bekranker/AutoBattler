@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using DG.Tweening;
 using TMPro;
@@ -15,6 +16,8 @@ public abstract class NPC : MonoBehaviour, IGridObject<NPCType>, IDamage, IAttac
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private TMP_Text _healCount;
     [SerializeField] private GameObject _canvas;
+
+    public event Action OnDie;
     public void Die()
     {
         if (_canvas.gameObject != null)
@@ -24,6 +27,7 @@ public abstract class NPC : MonoBehaviour, IGridObject<NPCType>, IDamage, IAttac
         _gameManager.C_BattleSystem.StopBattle();
         _myHolder.SetEmpty(this);
         _myHolder.ShiftLine();
+        OnDie?.Invoke();
         Destroy(gameObject);
     }
     /// <summary>

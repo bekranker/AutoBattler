@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Pack of One
   m_EditorClassIdentifier: 
   NPCPack:
-  - {fileID: 11400000, guid: 32183b2949c70914ab469184182ed893, type: 2}
+  - {fileID: 11400000, guid: cc7af64166f764adf801194ff1a5b70e, type: 2}
