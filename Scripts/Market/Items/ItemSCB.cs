@@ -5,5 +5,5 @@ public class ItemSCB : ScriptableObject
 {
     public Sprite ItemSprite;
     public int ItemLevel;
-
+    public float Cost;
 }

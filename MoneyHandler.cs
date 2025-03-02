@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -37,7 +36,6 @@ public class MoneyHandler : MonoBehaviour
         CurrnetMoney -= amount;
         ChangeTMP();
         SaveManager.SaveMoney((int)CurrnetMoney);
-
     }
     public Tween MoveTowardsUI(GameObject coin)
     {

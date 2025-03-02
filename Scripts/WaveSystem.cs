@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 
 public class WaveSystem : MonoBehaviour
 {
@@ -12,6 +15,8 @@ public class WaveSystem : MonoBehaviour
     [SerializeField] private List<WaveType> _waves = new();
     [SerializeField] private List<PackType> _packs = new();
 
+    public event Action OnPassingnNextWave;
+    public WaveType CurrentWave;
     private int _waveIndex;
     private int _remainingCount;
 
@@ -19,15 +24,17 @@ public class WaveSystem : MonoBehaviour
     {
         _waveIndex = SaveManager.GetWave();
         _remainingCount = _waves[_waveIndex].TotalEnemy;
+        CurrentWave = _waves[_waveIndex];
         SpawnEnemies();
     }
     public void NextWave()
     {
         if (_waveIndex + 1 < _waves.Count) return;
-
         _waveIndex++;
         SaveManager.SaveWave(_waveIndex);
         _remainingCount = _waves[_waveIndex].TotalEnemy;
+        CurrentWave = _waves[_waveIndex];
+        OnPassingnNextWave?.Invoke();
     }
     public void SpawnEnemies()
     {

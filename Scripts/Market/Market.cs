@@ -1,16 +1,28 @@
+using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
-
+using DG.Tweening;
 public class Market : MonoBehaviour
 {
     [Header("----Components")]
     [SerializeField] private MoneyHandler _moneyHandler;
+    [SerializeField] private WaveSystem _waveSystem;
     [Header("----Raycast Props")]
     [SerializeField] private LayerMask _raycastLayerItems;
     [SerializeField] private LayerMask _raycastLayerCollectables;
-
+    [SerializeField] private LayerMask _raycastPutPlace;
+    [Header("----Item Props")]
+    [SerializeField] private List<ItemSCB> _marketObjectsThatcanSell;
+    [SerializeField] private MarketObject _marketObjectPrefab;
     private IDraggable _currentDraggable;
     private RaycastHit2D _hit2D, _hit2DCollectable;
+    [SerializeField] private GenericInventory _inventory;
+    [SerializeField] private GenericInventory _players;
 
+    void Start()
+    {
+        InitializeMarket();
+    }
     void Update()
     {
         Collectable();
@@ -22,7 +34,37 @@ public class Market : MonoBehaviour
         }
         ItemDrag();
     }
-
+    void OnEnable()
+    {
+        _waveSystem.OnPassingnNextWave += ReDesignMarketItems;
+    }
+    void OnDisable()
+    {
+        _waveSystem.OnPassingnNextWave -= ReDesignMarketItems;
+    }
+    [Button("---Re Design Market Items")]
+    private void ReDesignMarketItems()
+    {
+        if (_waveSystem.CurrentWave == null) return;
+        if (_waveSystem.CurrentWave.NewItemsForMarket.Count == 0) return;
+        _waveSystem.CurrentWave.NewItemsForMarket?.ForEach((item) =>
+        {
+            if (!_marketObjectsThatcanSell.Contains(item))
+            {
+                _marketObjectsThatcanSell.Add(item);
+            }
+        });
+    }
+    private void InitializeMarket()
+    {
+        ReDesignMarketItems();
+        for (int i = 0; i < _inventory.Cells.Count; i++)
+        {
+            MarketObject spawnedSCB = Instantiate(_marketObjectPrefab, _inventory.Cells[i].CellT.position, Quaternion.identity);
+            spawnedSCB.transform.DOPunchScale(DoTweenProps.Instance.PunchScale, DoTweenProps.Instance.PunchDuration);
+            _inventory.Cells[i].SetCell(spawnedSCB);
+        }
+    }
     private void ItemDrag()
     {
         if (Input.GetMouseButtonDown(0))
@@ -30,7 +72,7 @@ public class Market : MonoBehaviour
             _hit2D = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector3.forward, 100, _raycastLayerItems);
             if (_hit2D.collider != null)
             {
-                if (_hit2D.collider.TryGetComponent<IDraggable>(out IDraggable draggable))
+                if (_hit2D.collider.TryGetComponent(out IDraggable draggable))
                 {
                     _currentDraggable = draggable;
                     _currentDraggable.OnDragStart();
@@ -39,9 +81,11 @@ public class Market : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
+
             if (_currentDraggable != null)
             {
-                _currentDraggable.OnDragEnd();
+                _hit2D = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector3.forward, 100, _raycastPutPlace);
+                //_currentDraggable.OnDragEnd();
                 _currentDraggable = null;
             }
         }

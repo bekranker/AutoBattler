@@ -1,9 +1,5 @@
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
-{
-
-}
 
 [System.Serializable]
 public class Cell
@@ -14,6 +10,8 @@ public class Cell
 
     public void SetCell(IMarketObject marketObject)
     {
+        if (Busy) return;
         CurrentHoldingObject = marketObject;
+        Busy = true;
     }
 }
